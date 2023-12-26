@@ -14,6 +14,14 @@ enum Snake_Direction back_direction[5] = {DOWN, UP, RIGHT, LEFT, NONE};
 int g_name_len;
 char g_name[1000];
 
+enum Snake_Direction input_key_to_snake_direction(enum input_key key) {
+    if (key == INPUT_UP) return UP;
+    if (key == INPUT_DOWN) return DOWN;
+    if (key == INPUT_LEFT) return LEFT;
+    if (key == INPUT_RIGHT) return RIGHT;
+    return NONE;
+}
+
 // 1A
 int get_id_cell(Position pos, int width) {
     return pos.x + pos.y * (int)width;

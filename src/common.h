@@ -33,6 +33,7 @@ extern enum Snake_Direction back_direction[5];
  * INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, and INPUT_NONE.
  */
 enum input_key { INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, INPUT_NONE };
+enum Snake_Direction input_key_to_snake_direction(enum input_key key);
 
 // TODO: declare global variables needed for your snake (as `extern`)! (part 1A)
 
