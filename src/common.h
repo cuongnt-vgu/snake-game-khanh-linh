@@ -2,6 +2,9 @@
 #define COMMON_H
 
 #include <stddef.h>
+#include <stdbool.h>
+#include "linked_list.h"
+
 
 // Let's see if we can keep this as simple as possible, lest we intimidate
 // students looking through the provided code.
@@ -11,6 +14,16 @@
 #define FLAG_SNAKE 0b0010       // equals 2
 #define FLAG_WALL 0b0100        // equals 4
 #define FLAG_FOOD 0b1000        // equals 8
+
+
+// part 1A
+typedef struct Position {
+    int x;
+    int y;
+} Position;
+int get_id_cell(Position pos, int width);
+enum Snake_Direction { UP, DOWN, LEFT, RIGHT, NONE};
+extern enum Snake_Direction back_direction[5];
 
 /**
  * Enumerated types, also known as "enums", are a way to create a set of named
@@ -43,7 +56,23 @@ extern int g_score;      // game score: 1 point for every food eaten
 typedef struct snake {
     // TODO: Define your snake struct! (in 2A)
     // Store any necessary information about your snake here.
+    int length;
+    node_t *head_pos, *tail_pos;
+    node_t *head_direction, *tail_direction;
 } snake_t;
+
+// Part 2B
+
+extern int g_name_len;
+extern char g_name[1000];
+
+void grown_snake_with_pos(snake_t *snake, Position pos, enum Snake_Direction direction);
+
+void grown_snake(snake_t *snake);
+
+void update_snake_direction(snake_t *snake, enum Snake_Direction direction);
+void update_snake_position(snake_t *snake);
+bool update_snake_in_board(int* cells, int width, int height, snake_t* snake_p, int snake_grows, bool init);
 
 void set_seed(unsigned seed);
 unsigned generate_index(unsigned size);
