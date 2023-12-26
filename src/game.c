@@ -27,8 +27,13 @@ void update(int* cells, size_t width, size_t height, snake_t* snake_p,
     // to the new position. If the snake eats food, the game score (`g_score`)
     // increases by 1. This function assumes that the board is surrounded by
     // walls, so it does not handle the case where a snake runs off the board.
-
-    // TODO: implement!
+    // width = 20
+    // height = 10
+    if (g_game_over) return;
+    update_snake_direction(snake_p, input);
+    update_snake_position(snake_p);
+    bool more_food = update_snake_in_board(cells, width, height, snake_p, growing, false);
+    if (more_food) place_food(cells, width, height);
 }
 
 /** Sets a random space on the given board to food.
@@ -56,7 +61,19 @@ void place_food(int* cells, size_t width, size_t height) {
 void read_name(char* write_into) {
     // TODO: implement! (remove the call to strcpy once you begin your
     // implementation)
-    strcpy(write_into, "placeholder");
+    // strcpy(write_into, "placeholder");
+    ssize_t bytes_read = 1;
+    int len = 1;
+    do {
+        if (len == 0) {
+            printf("Invalid name. Please try again.\n");
+        }
+        printf("Please enter your name: ");
+        fflush(stdout);
+        bytes_read = read(STDIN_FILENO, write_into, 1000);
+        len = mbslen(write_into);
+    } while (len == 0);
+     write_into[bytes_read] = '\0';
 }
 
 /** Cleans up on game over — should free any allocated memory so that the
@@ -68,4 +85,8 @@ void read_name(char* write_into) {
  */
 void teardown(int* cells, snake_t* snake_p) {
     // TODO: implement!
+    free(cells);
+    delete_list(snake_p->head_pos);
+    delete_list(snake_p->head_direction);
+    // free(snake_p);
 }

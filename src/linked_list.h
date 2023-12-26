@@ -11,10 +11,13 @@ typedef struct node {
     struct node* prev;
 } node_t;
 
+void delete_list(node_t* head_list);
+
 // function declarations
 int length_list(node_t* head_list);
 void* get_first(node_t* head_list);
 void* get_last(node_t* head_list);
+// void delete_list(node_t** head_list)
 void insert_first(node_t** head_list, void* to_add, size_t size);
 void insert_last(node_t** head_list, void* to_add, size_t size);
 void* get(node_t* head_list, int index);
