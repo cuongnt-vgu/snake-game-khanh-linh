@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
         enum input_key input = get_input();
         update(cells, width, height, &snake, input, snake_grows);
         render_game(cells, width, height);
-        usleep(1e6);
+        usleep(5e5);
     }
     end_game(cells, width, height, &snake);
 }
